@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: product-service
+  cloud:
+    kubernetes:
+      config:
+        name: product-service
+      reload:
+        monitoring-secrets: true
+        enabled: true
+  mvc:
+    servlet:
+      path: /api

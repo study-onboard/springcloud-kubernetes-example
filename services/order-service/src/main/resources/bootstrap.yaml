@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    kubernetes:
+      config:
+        name: order-service
+      reload:
+        monitoring-secrets: true
+        enabled: true
+  mvc:
+    servlet:
+      path: /api
