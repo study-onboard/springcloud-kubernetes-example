@@ -1,0 +1,2 @@
+services.product.url: http://localhost:8080
+welcome.message: local welcome message
