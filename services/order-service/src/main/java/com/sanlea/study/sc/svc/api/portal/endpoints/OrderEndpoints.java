@@ -1,7 +1,8 @@
 package com.sanlea.study.sc.svc.api.portal.endpoints;
 
-import com.sanlea.study.sc.common.service.security.portal.PortalApiRequestHeadersHolder;
-import com.sanlea.study.sc.common.service.security.service.ServiceApiAccessTokenManager;
+import com.sanlea.study.sc.common.starter.microservice.security.ValidatePortalApiAuth;
+import com.sanlea.study.sc.common.starter.microservice_api_client.backend.BackendApiAccessTokenManager;
+import com.sanlea.study.sc.common.starter.microservice_api_client.portal.PortalApiRequestHeadersHolder;
 import com.sanlea.study.sc.svc.domain.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,18 +25,19 @@ import java.util.List;
 @RefreshScope
 public class OrderEndpoints {
     private final ProductService productService;
-    private final ServiceApiAccessTokenManager accessTokenManager;
+    private final BackendApiAccessTokenManager accessTokenManager;
 
 
     @Value("${welcome.message}")
     private String message;
 
-    public OrderEndpoints(ProductService productService, ServiceApiAccessTokenManager accessTokenManager) {
+    public OrderEndpoints(ProductService productService, BackendApiAccessTokenManager accessTokenManager) {
         this.productService = productService;
         this.accessTokenManager = accessTokenManager;
     }
 
     @GetMapping
+    @ValidatePortalApiAuth
     public List<String> orderList() {
         var orders = new ArrayList<String>();
         orders.add("ID00001");
