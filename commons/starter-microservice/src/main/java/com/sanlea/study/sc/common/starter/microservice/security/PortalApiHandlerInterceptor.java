@@ -1,7 +1,7 @@
 package com.sanlea.study.sc.common.starter.microservice.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sanlea.study.sc.common.starter.microservice.MicroserviceApiError;
+import com.sanlea.study.sc.common.starter.microservice.exception.MicroserviceApiError;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;

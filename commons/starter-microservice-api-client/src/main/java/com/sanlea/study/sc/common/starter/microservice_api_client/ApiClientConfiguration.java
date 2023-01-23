@@ -1,7 +1,7 @@
 package com.sanlea.study.sc.common.starter.microservice_api_client;
 
-import com.sanlea.study.sc.common.starter.microservice_api_client.backend.BackendApiFeignRequestInterceptor;
 import com.sanlea.study.sc.common.starter.microservice_api_client.backend.BackendApiAccessTokenManager;
+import com.sanlea.study.sc.common.starter.microservice_api_client.backend.BackendApiFeignRequestInterceptor;
 import com.sanlea.study.sc.common.starter.microservice_api_client.portal.PortalApiFeignRequestInterceptor;
 import com.sanlea.study.sc.common.starter.microservice_api_client.portal.PortalApiHandlerInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

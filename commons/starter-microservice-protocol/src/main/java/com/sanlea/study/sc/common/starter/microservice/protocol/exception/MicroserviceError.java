@@ -1,4 +1,4 @@
-package com.sanlea.study.sc.common.starter.microservice;
+package com.sanlea.study.sc.common.starter.microservice.protocol.exception;
 
 import lombok.*;
 
@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Builder
-public class MicroserviceApiError {
+public class MicroserviceError {
     // code
     private String code;
 

@@ -1,5 +1,7 @@
 package com.sanlea.study.sc.common.starter.microservice_api_client.backend;
 
+import com.sanlea.study.sc.common.starter.microservice.protocol.exception.MicroserviceError;
+import com.sanlea.study.sc.common.starter.microservice.protocol.exception.RemoteServiceException;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -101,7 +103,7 @@ public class BackendApiAccessTokenManager {
      * @param <Req>         request type
      * @return response
      */
-    private <Resp extends BaseCspResponse, Req> Resp requestCsp(String path, Class<Resp> responseClass, Req request) {
+    private <Resp extends MicroserviceError, Req> Resp requestCsp(String path, Class<Resp> responseClass, Req request) {
         // build request url
         var requestUrl = "%s%s".formatted(this.cspServerAddress, path);
 
@@ -123,13 +125,13 @@ public class BackendApiAccessTokenManager {
 
             var cspResponse = httpResponse.getBody();
             if (cspResponse == null) {
-                throw new BackendApiCspRequestException(
+                throw new RemoteServiceException(
                         "Unknown CSP error: %s".formatted(httpResponse.getStatusCode())
                 );
             }
 
             if (!Objects.equals(cspResponse.getCode(), "SUCCESS")) {
-                throw new BackendApiCspRequestException("%s: %s".formatted(
+                throw new RemoteServiceException("%s: %s".formatted(
                         cspResponse.getCode(),
                         cspResponse.getError()
                 ));
@@ -137,7 +139,7 @@ public class BackendApiAccessTokenManager {
 
             return cspResponse;
         } catch (RestClientException ex) {
-            throw new BackendApiCspRequestException(ex.getMessage());
+            throw new RemoteServiceException("Access CSP service failed: %s".formatted(ex.getMessage()));
         }
     }
 
@@ -166,7 +168,8 @@ public class BackendApiAccessTokenManager {
     @NoArgsConstructor
     @Getter
     @Setter
-    private static class CspAccessTokenResponse extends BaseCspResponse {
+    @EqualsAndHashCode(callSuper = false)
+    private static class CspAccessTokenResponse extends MicroserviceError {
         // access token
         private String accessToken;
 
@@ -186,20 +189,5 @@ public class BackendApiAccessTokenManager {
 
         // application service
         private String applicationService;
-    }
-
-    /**
-     * Base response
-     */
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    private abstract static class BaseCspResponse {
-        // code
-        private String code;
-
-        // error
-        private String error;
     }
 }

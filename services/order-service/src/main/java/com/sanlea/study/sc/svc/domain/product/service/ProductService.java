@@ -1,6 +1,6 @@
 package com.sanlea.study.sc.svc.domain.product.service;
 
-import com.sanlea.study.sc.common.starter.microservice_api_client.portal.PortalAPI;
+import com.sanlea.study.sc.common.starter.microservice_api_client.backend.BackendAPI;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -12,7 +12,11 @@ import java.util.List;
  * @author kut
  */
 //@PortalAPI
-@PortalAPI
+//@PortalAPI
+@BackendAPI(
+        applicationId = "xxxx",
+        service = "yyyy"
+)
 @FeignClient(
         name = "order-service",
         url = "${services.product.url}",

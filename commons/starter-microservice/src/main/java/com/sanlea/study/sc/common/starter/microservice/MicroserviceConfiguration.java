@@ -28,4 +28,10 @@ public class MicroserviceConfiguration {
     public RestTemplate buildRestTemplate() {
         return new RestTemplate();
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public GlobalExceptionHandler buildGlobalExceptionHandler() {
+        return new GlobalExceptionHandler();
+    }
 }
